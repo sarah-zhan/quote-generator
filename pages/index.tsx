@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 
-import { Background, BackgroundImage1, BackgroundImage2, Footer } from '@/components/QuoteGenerator/QuoteGeneratorElements';
+import { Background, BackgroundImage1, BackgroundImage2, Footer, FooterLink } from '@/components/QuoteGenerator/QuoteGeneratorElements';
 
 import image1 from "../assets/Moon01.png"
 import image2 from "../assets/Sun.png"
@@ -29,7 +29,13 @@ export default function Home() {
 						Quotes Generated: {numberOfQuotes}
 						<br />
 						Developed with 💖 by{' '}
-						<FooterLink href='https://www.linkedin.com/in/yishanzhan/' target="_blank" rel="noopener noreferrer">@yishanzhan</FooterLink>
+						<FooterLink
+							href='https://github.com/sarah-zhan'
+							target='_blank'
+							rel='noopener noreferrer'
+						>
+							@yishanzhan
+						</FooterLink>
 					</>
 				</Footer>
 			</Background>

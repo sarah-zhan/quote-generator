@@ -48,6 +48,7 @@ export const Footer = styled.div`
   z-index: 10;
 `;
 
-export const FooterLink = styled.div`
-  
-`
+export const FooterLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+`;
