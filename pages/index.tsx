@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 
-import { Background, BackgroundImage1, BackgroundImage2, Footer, FooterLink, QuoteGenerator, QuoteGeneratorInner, QuoteGeneratorSubTitle, QuoteGeneratorTitle } from '@/components/QuoteGenerator/QuoteGeneratorElements';
+import { Background, BackgroundImage1, BackgroundImage2, Footer, FooterLink, QuoteGenerator, QuoteGeneratorButton, QuoteGeneratorButtonText, QuoteGeneratorInner, QuoteGeneratorSubTitle, QuoteGeneratorTitle } from '@/components/QuoteGenerator/QuoteGeneratorElements';
 
 import image1 from "../assets/Moon01.png"
 import image2 from "../assets/Sun.png"
@@ -25,7 +25,7 @@ export default function Home() {
 				{/* modal quote generator */}
 				<QuoteGenerator>
 					<QuoteGeneratorInner>
-						<QuoteGeneratorTitle>Your Daily Boost</QuoteGeneratorTitle>
+						<QuoteGeneratorTitle>Your Daily Mind Boost</QuoteGeneratorTitle>
 						<QuoteGeneratorSubTitle>
 							Provide by
 							<FooterLink

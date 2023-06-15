@@ -25,15 +25,15 @@ export const Background = styled.div`
 export const BackgroundImage1 = styled(Image)`
 	position: absolute;
 	z-index: 1;
-	margin-left: 63px;
-	margin-top: 72px;
+	margin-left: 16px;
+	margin-top: 22px;
 `;
 
 export const BackgroundImage2 = styled(Image)`
 	position: absolute;
 	z-index: 1;
-	right: 118px;
-	bottom: 37px;
+	right: 19px;
+	bottom: 11px;
 `;
 
 export const Footer = styled.div`
@@ -56,54 +56,95 @@ export const FooterLink = styled(Link)`
 export const QuoteGenerator = styled.div`
 	min-height: 350px;
 	min-width: 350px;
-	height: 30vh;
-	width: 40vw;
-	top: 30%;
-	left: 30%;
-	transform: translated(-50%, -50%);
+	height: 70vh;
+	width: 70vw;
+	border: 2px solid #ffffff22;
+	border-radius: 15px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	position: absolute;
-	z-index: 2
+	z-index: 2;
 
-	background: rgba(0, 0, 0, 0.75);
+	background: rgba(0, 0, 70, 0.3);
 	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	backdrop-filter: blur(9.5px);
-	-webkit-backdrop-filter: blur(9.5px);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
 	border-radius: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.18);
 `;
 
 export const QuoteGeneratorInner = styled.div`
-	top: 30%;
-	left: 30%;
-	transform: translated(-50%, -50%);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	position: absolute;
 	width: 100%;
 `;
 
 export const QuoteGeneratorTitle = styled.div`
-	font-family: "Permanent Marker", cursive;
+	font-family: 'Permanent Marker', cursive;
 	font-size: 50px;
 	text-align: center;
 	color: white;
-	padding: 0 20px 0 20px;
+	padding: 0px 20px 0px 20px;
 	position: relative;
+	/* media query */
 	@media only screen and (max-width: 600px) {
 		font-size: 30px;
 	}
 `;
 
 export const QuoteGeneratorSubTitle = styled.div`
-	font-family: "Caveat", cursive;
-	font-size: 50px;
-	text-align: center;
 	color: white;
-	width: 100%
+	font-family: 'Caveat', cursive;
+	font-size: 35px;
+	position: relative;
+	width: 100%;
 	text-align: center;
-	padding: 0 20px 0 20px;
+	padding: 0px 20px 0px 20px;
 	@media only screen and (max-width: 600px) {
 		font-size: 25px;
+	}
 `;
 
 export const QuoteGeneratorButton = styled.div`
-	
+	height: 100px;
+	width: 300px;
+	border: 2px solid darkgrey;
+	border-radius: 20px;
+
+	margin-top: 20px;
+	position: relative;
+	transition: 0.2s all ease-in-out;
+	cursor: pointer;
+	top: 20px;
+	margin: auto;
+	transform-origin: center;
+
+	background: rgba(0, 0, 70, 0.3);
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	&:hover {
+		filter: brightness(3);
+		transition: 0.2s all ease-in-out;
+		transform: scale(1.1);
+
+		transform-origin: center;
+	}
+`;
+
+export const QuoteGeneratorButtonText = styled.div`
+	color: white;
+	font-family: 'Caveat', cursive;
+	font-size: 35px;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	width: 100%;
+	text-align: center;
 `;
