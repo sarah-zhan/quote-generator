@@ -1,0 +1,1 @@
+# Quote Generator with Next.js in AWS
