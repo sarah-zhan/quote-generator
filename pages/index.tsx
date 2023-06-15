@@ -22,8 +22,36 @@ export default function Home() {
 			</Head>
 			{/* background */}
 			<Background>
+				{/* modal quote generator */}
+				<QuoteGenerator>
+					<QuoteGeneratorInner>
+						<QuoteGeneratorTitle>Your Daily Boots</QuoteGeneratorTitle>
+						<QuoteGeneratorSubTitle>
+							Provide by
+							<FooterLink
+								href='https://zenquotes.io/'
+								target='_blank'
+								rel='noopener noreferrer'
+							>
+								ZenQuotes.io
+							</FooterLink>
+						</QuoteGeneratorSubTitle>
+
+						{/* button quote generator */}
+						<QuoteGeneratorButton>
+							<QuoteGeneratorButtonText onClick={null}>
+								Inspire me!
+							</QuoteGeneratorButtonText>
+						</QuoteGeneratorButton>
+						
+					</QuoteGeneratorInner>
+				</QuoteGenerator>
+
+				{/* background images */}
 				<BackgroundImage1 src={image1} height='280' alt='image1' />
 				<BackgroundImage2 src={image2} height='300' alt='image2' />
+
+				{/* footer */}
 				<Footer>
 					<>
 						Quotes Generated: {numberOfQuotes}
