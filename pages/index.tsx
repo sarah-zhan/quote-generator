@@ -1,13 +1,17 @@
+import React, {useState} from 'react';
+
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 
-import { Background, BackgroundImage1, BackgroundImage2 } from '@/components/QuoteGenerator/QuoteGeneratorElements';
+import { Background, BackgroundImage1, BackgroundImage2, Footer } from '@/components/QuoteGenerator/QuoteGeneratorElements';
 
 import image1 from "../assets/Moon01.png"
 import image2 from "../assets/Sun.png"
 
 export default function Home() {
+  const [numberOfQuotes, setNumberOfQuotes] = useState(0)
+
   return (
 		<>
 			<Head>
@@ -18,8 +22,16 @@ export default function Home() {
 			</Head>
 			{/* background */}
 			<Background>
-				<BackgroundImage1 src={image1} height='300' alt='image1' />
+				<BackgroundImage1 src={image1} height='280' alt='image1' />
 				<BackgroundImage2 src={image2} height='300' alt='image2' />
+				<Footer>
+					<>
+						Quotes Generated: {numberOfQuotes}
+						<br />
+						Developed with 💖 by{' '}
+						<FooterLink href='https://www.linkedin.com/in/yishanzhan/' target="_blank" rel="noopener noreferrer">@yishanzhan</FooterLink>
+					</>
+				</Footer>
 			</Background>
 		</>
 	);

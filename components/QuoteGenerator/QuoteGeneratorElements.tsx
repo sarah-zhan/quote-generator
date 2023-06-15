@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
+import exp from 'constants';
 
 export const Background = styled.div`
 	background: linear-gradient(to right, #000460, #1cb5e0);
@@ -34,3 +35,19 @@ export const BackgroundImage2 = styled(Image)`
 	right: 118px;
 	bottom: 37px;
 `;
+
+export const Footer = styled.div`
+  width: 100vw;
+  height: 50px;
+  text-align: center;
+  font-family: "Source Code Pro", monospace;
+  font-size: 15px;
+  position: absolute;
+  bottom: 0;
+  color: white;
+  z-index: 10;
+`;
+
+export const FooterLink = styled.div`
+  
+`
