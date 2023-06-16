@@ -7,8 +7,8 @@
           "additionalAuthenticationProviders": [
             {
               "apiKeyConfig": {
-                "apiKeyExpirationDate": "2023-06-30T18:07:09.643Z",
-                "apiKeyExpirationDays": 14,
+                "apiKeyExpirationDate": "2023-06-23T19:39:04.756Z",
+                "apiKeyExpirationDays": 7,
                 "description": "API key for quote generator"
               },
               "authenticationType": "API_KEY"
@@ -24,7 +24,7 @@
     }
   },
   "auth": {
-    "quotegenerator20259dc1": {
+    "quotegeneratorf618a417": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -54,6 +54,24 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_quoteLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "quoteLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_quoteLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "quoteLambda"
+        }
+      ]
     }
   }
 }
