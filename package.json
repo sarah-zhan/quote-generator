@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^5.0.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.13.5",
@@ -16,6 +17,7 @@
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "@types/styled-components": "^5.1.26",
+    "aws-amplify": "^5.2.7",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
     "next": "13.4.5",
