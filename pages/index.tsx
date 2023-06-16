@@ -1,18 +1,88 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '@/styles/Home.module.css'
+import Head from 'next/head';
+import Image from 'next/image';
+import styles from '@/styles/Home.module.css';
 
-import { Background, BackgroundImage1, BackgroundImage2, Footer, FooterLink, QuoteGenerator, QuoteGeneratorButton, QuoteGeneratorButtonText, QuoteGeneratorInner, QuoteGeneratorSubTitle, QuoteGeneratorTitle } from '@/components/QuoteGenerator/QuoteGeneratorElements';
+import {
+	Background,
+	BackgroundImage1,
+	BackgroundImage2,
+	Footer,
+	FooterLink,
+	QuoteGenerator,
+	QuoteGeneratorButton,
+	QuoteGeneratorButtonText,
+	QuoteGeneratorInner,
+	QuoteGeneratorSubTitle,
+	QuoteGeneratorTitle,
+} from '@/components/QuoteGenerator/QuoteGeneratorElements';
 
-import image1 from "../assets/Moon01.png"
-import image2 from "../assets/Sun.png"
+import image1 from '../assets/Moon01.png';
+import image2 from '../assets/Sun.png';
+import { API } from 'aws-amplify';
+import { quotesQueryName } from '@/src/graphql/queries';
+import { GraphQLResult } from '@aws-amplify/api-graphql';
+
+// interface for DynomoDB object
+interface UpdateData {
+	id: string;
+	queryName: string;
+	quotesGenerated: number;
+	createdAt: string;
+	updatedAt: string;
+}
+
+//type guard
+function graphQLResult(response: any): response is GraphQLResult<{
+	quotesQueryName: {
+		items: [UpdateData];
+	};
+}> {
+	return (
+		response.data &&
+		response.data.quotesQueryName &&
+		response.data.quotesQueryName.items
+	);
+}
 
 export default function Home() {
-  const [numberOfQuotes, setNumberOfQuotes] = useState(0)
+	const [numberOfQuotes, setNumberOfQuotes] = useState<Number | null>(0);
 
-  return (
+	// to fetch the quotes
+	const updateData = async () => {
+		try {
+			const response = await API.graphql<UpdateData>({
+				query: quotesQueryName,
+				authMode: 'AWS_IAM',
+				variables: {
+					queryName: 'LIVE',
+				},
+			});
+			// console.log("response:", response)
+
+			// type	guard
+			if (!graphQLResult(response)) {
+				throw new Error('Error from API.graphql');
+			}
+
+			if (!response.data) {
+				throw new Error('Data is undefined');
+			}
+
+			// update the number of quotes
+			const number = response.data.quotesQueryName.items[0].quotesGenerated;
+			setNumberOfQuotes(number);
+		} catch (error) {
+			console.log('Error from data: ', error);
+		}
+	};
+
+	useEffect(() => {
+		updateData();
+	}, []);
+
+	return (
 		<>
 			<Head>
 				<title>Quote Generator</title>
@@ -43,7 +113,6 @@ export default function Home() {
 								Inspire me!
 							</QuoteGeneratorButtonText>
 						</QuoteGeneratorButton>
-
 					</QuoteGeneratorInner>
 				</QuoteGenerator>
 
