@@ -93,6 +93,15 @@ export default function Home() {
 			{/* background */}
 			<Background>
 				{/* modal quote generator */}
+				<ModalQuoteGenerator
+					// open={openGenerator}
+					// close={closeGenerator}
+					// processQuote={processQuote}
+					// setProcessingQuote={setProcessingQuote}
+					// quoteReceived={quoteReceived}
+					// setQuoteReceived={setQuoteReceived}
+				/>
+				{/* Quote Generator */}
 				<QuoteGenerator>
 					<QuoteGeneratorInner>
 						<QuoteGeneratorTitle>Your Daily Mind Boost</QuoteGeneratorTitle>
