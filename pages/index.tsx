@@ -52,8 +52,8 @@ function graphQLResult(response: any): response is GraphQLResult<{
 export default function Home() {
 	const [numberOfQuotes, setNumberOfQuotes] = useState<Number | null>(0);
 	const [openGenerator, setOpenGenerator] = useState<boolean>(false);
-	// const [processingQuote, setProcessingQuote] = useState<boolean>(false);
-	// const [quoteReceived, setQuoteReceived] = useState<boolean>(false);
+	const [processingQuote, setProcessingQuote] = useState<boolean>(false);
+	const [quoteReceived, setQuoteReceived] = useState<String | null>(null);
 	// const [quote, setQuote] = useState<string>('');
 	// to fetch the quotes
 	const updateData = async () => {
@@ -93,6 +93,13 @@ export default function Home() {
 		setOpenGenerator(false);
 	};
 
+	// handle open of quote generator modal
+	const handleOpenGenerator = async(e: React.SyntheticEvent) => {
+		e.preventDefault();
+		setOpenGenerator(true);
+
+	}
+
 	return (
 		<>
 			<Head>
@@ -107,7 +114,7 @@ export default function Home() {
 				<QuoteGeneratorModal
 					open={openGenerator}
 					close={handleCloseGenerator}
-					processQuote={processQuote}
+					processingQuote={processingQuote}
 					setProcessingQuote={setProcessingQuote}
 					quoteReceived={quoteReceived}
 					setQuoteReceived={setQuoteReceived}
@@ -129,7 +136,7 @@ export default function Home() {
 
 						{/* button quote generator */}
 						<QuoteGeneratorButton>
-							<QuoteGeneratorButtonText onClick={null}>
+							<QuoteGeneratorButtonText onClick={handleOpenGenerator}>
 								Inspire me!
 							</QuoteGeneratorButtonText>
 						</QuoteGeneratorButton>

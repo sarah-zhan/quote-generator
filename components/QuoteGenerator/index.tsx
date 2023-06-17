@@ -1,9 +1,25 @@
-import { Modal } from '@mui/material';
+import { Modal, Backdrop, Fade } from '@mui/material';
 import React from 'react'
 
-const QuoteGeneratorModal = ({open, close, Backdrop}) => {
+interface QuoteGeneratorModalProps {
+	open: boolean;
+	close: () => void;
+	processingQuote: boolean;
+	setProcessingQuote: React.Dispatch<React.SetStateAction<boolean>>;
+	quoteReceived: String | null;
+	setQuoteReceived: React.Dispatch<React.SetStateAction<String | null>>;
+}
+
+const QuoteGeneratorModal = ({
+	open,
+	close,
+	processingQuote,
+	setProcessingQuote,
+	quoteReceived,
+	setQuoteReceived,
+}: QuoteGeneratorModalProps) => {
   return (
-		<Modal>
+		<Modal
 			id="QuoteGeneratorModal"
 			aria-labelledby="Quote-Generator"
 			aria-describedby="Quote-Generator-Open-Close"
@@ -14,6 +30,10 @@ const QuoteGeneratorModal = ({open, close, Backdrop}) => {
       BackdropProps={{
         timeout: 500,
       }}
+		>
+			<Fade in={open}>
+				
+			</Fade>
 		</Modal>
 	);
 }
