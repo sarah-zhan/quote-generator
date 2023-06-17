@@ -18,6 +18,8 @@ import {
 	QuoteGeneratorTitle,
 } from '@/components/QuoteGenerator/QuoteGeneratorElements';
 
+import QuoteGeneratorModal from '@/components/QuoteGenerator';
+
 import image1 from '../assets/Moon01.png';
 import image2 from '../assets/Sun.png';
 import { API } from 'aws-amplify';
@@ -46,9 +48,13 @@ function graphQLResult(response: any): response is GraphQLResult<{
 	);
 }
 
+
 export default function Home() {
 	const [numberOfQuotes, setNumberOfQuotes] = useState<Number | null>(0);
-
+	const [openGenerator, setOpenGenerator] = useState<boolean>(false);
+	// const [processingQuote, setProcessingQuote] = useState<boolean>(false);
+	// const [quoteReceived, setQuoteReceived] = useState<boolean>(false);
+	// const [quote, setQuote] = useState<string>('');
 	// to fetch the quotes
 	const updateData = async () => {
 		try {
@@ -82,6 +88,11 @@ export default function Home() {
 		updateData();
 	}, []);
 
+	// handle close of quote generator modal
+	const handleCloseGenerator = () => {
+		setOpenGenerator(false);
+	};
+
 	return (
 		<>
 			<Head>
@@ -93,13 +104,13 @@ export default function Home() {
 			{/* background */}
 			<Background>
 				{/* modal quote generator */}
-				<ModalQuoteGenerator
-					// open={openGenerator}
-					// close={closeGenerator}
-					// processQuote={processQuote}
-					// setProcessingQuote={setProcessingQuote}
-					// quoteReceived={quoteReceived}
-					// setQuoteReceived={setQuoteReceived}
+				<QuoteGeneratorModal
+					open={openGenerator}
+					close={handleCloseGenerator}
+					processQuote={processQuote}
+					setProcessingQuote={setProcessingQuote}
+					quoteReceived={quoteReceived}
+					setQuoteReceived={setQuoteReceived}
 				/>
 				{/* Quote Generator */}
 				<QuoteGenerator>
