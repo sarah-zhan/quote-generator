@@ -3,6 +3,7 @@ import React from 'react'
 import { ModalCircularProgress, QuoteGeneratorModalContainer, QuoteGeneratorModalInnerContainer, QuoteGeneratorSubTitle, QuoteGeneratorTitle } from './QuoteGeneratorElements';
 import ImageBlock from '../animation/ImageBlock';
 import { ImageBlockContainer } from '../animation/AnimationElements';
+import DownloadButton from '../animation/DownloadButton';
 
 interface QuoteGeneratorModalProps {
 	open: boolean;
@@ -98,7 +99,7 @@ const QuoteGeneratorModal = ({
 								</QuoteGeneratorSubTitle>
 							</>
 						)}
-						{quoteReceived !== null &&
+						{quoteReceived === null &&
 							<>
 								<QuoteGeneratorTitle>
 									Your quote is ready!
