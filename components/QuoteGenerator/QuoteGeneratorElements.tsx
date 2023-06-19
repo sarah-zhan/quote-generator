@@ -181,3 +181,7 @@ export const ModalCircularProgress = styled(CircularProgress)`
 	left: 50%;
 	transform: translateX(-50%);
 `;
+
+export const ModalCircleTitle = styled.div`
+	
+`;

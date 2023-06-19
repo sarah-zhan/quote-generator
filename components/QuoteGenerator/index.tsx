@@ -1,6 +1,6 @@
 import { Modal, Backdrop, Fade } from '@mui/material';
 import React from 'react'
-import { ModalCircularProgress, QuoteGeneratorModalContainer, QuoteGeneratorModalInnerContainer } from './QuoteGeneratorElements';
+import { ModalCircularProgress, QuoteGeneratorModalContainer, QuoteGeneratorModalInnerContainer, QuoteGeneratorSubTitle, QuoteGeneratorTitle } from './QuoteGeneratorElements';
 
 interface QuoteGeneratorModalProps {
 	open: boolean;
@@ -26,7 +26,7 @@ const QuoteGeneratorModal = ({
 }: QuoteGeneratorModalProps) => {
 
 	const wiseDevQuote = "If you don't know where to start, start where you are.";
-	const wiseDevQuoteAuthor = "XXXXXXXX";
+	const wiseDevQuoteAuthor = "From an experienced Software Developer";
 
 	const ModalCircleProgress = () => {
 		return (
@@ -81,19 +81,24 @@ const QuoteGeneratorModal = ({
 				<QuoteGeneratorModalContainer sx={style}>
 					<QuoteGeneratorModalInnerContainer>
 						{/* request a quote, but return null */}
-						{processingQuote === true && quoteReceived === null && (
+						{processingQuote === true && quoteReceived === null}
 							<>
-								<ModalCircularProgress size={'8rem'} thickness={2.5} />
-								<ModalCircleTitle>Creating your quote...</ModalCircleTitle>
-								<ModalCircleDescription style={{ marginTop: '1rem' }}>
+								<ModalCircularProgress
+								size={'8rem'}
+								thickness={2.5}
+								/>
+								<QuoteGeneratorTitle>
+									Creating your quote...
+								</QuoteGeneratorTitle>
+								<QuoteGeneratorSubTitle style={{marginTop: '20px'}}>
 									{wiseDevQuote}
-									<br />
-									<span style={{ fontSize: '0.8rem' }}>
+									<br></br>
+									<span style={{ fontSize: 26 }}>
 										<strong>{wiseDevQuoteAuthor}</strong>
 									</span>
-								</ModalCircleDescription>
+								</QuoteGeneratorSubTitle>
 							</>
-						)}
+
 						{/* received quote */}
 					</QuoteGeneratorModalInnerContainer>
 				</QuoteGeneratorModalContainer>
