@@ -1,5 +1,5 @@
 import { Modal, Backdrop, Fade } from '@mui/material';
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { ModalCircularProgress, QuoteGeneratorModalContainer, QuoteGeneratorModalInnerContainer, QuoteGeneratorSubTitle, QuoteGeneratorTitle } from './QuoteGeneratorElements';
 import ImageBlock from '../animation/ImageBlock';
 import { ImageBlockContainer } from '../animation/AnimationElements';
@@ -30,6 +30,20 @@ const QuoteGeneratorModal = ({
 
 	const wiseDevQuote = "If you don't know where to start, start where you are.";
 	const wiseDevQuoteAuthor = "From an experienced Software Developer";
+
+	const [blockUrl, setBlockUrl] = useState<string | null>(null);
+
+	// handles download
+	const handleDownload = () => {
+		const link = document.createElement('a');
+		if (typeof blockUrl === 'string') {
+			link.download = 'quote.png';
+			link.href = blockUrl;
+			link.click();
+		}
+	;
+
+	// handles received
 
 	const ModalCircleProgress = () => {
 		return (
@@ -108,9 +122,14 @@ const QuoteGeneratorModal = ({
 									Here is your preview:
 								</QuoteGeneratorSubTitle>
 								<ImageBlockContainer>
-									<ImageBlock></ImageBlock>
+									<ImageBlock
+										quoteReceived={quoteReceived}
+										blockUrl={blockUrl}
+									/>
 								</ImageBlockContainer>
-								<DownloadButton></DownloadButton>
+								<DownloadButton
+									handleDownload={handleDownload}
+								/>
 							</>
 						}
 					</QuoteGeneratorModalInnerContainer>

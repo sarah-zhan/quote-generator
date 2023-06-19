@@ -6,9 +6,9 @@ import { CenteredLottie, DownloadButtonContainer, DownloadButtonText } from './A
 
 
 
-const DownloadButton = () => {
+const DownloadButton = ({handleDownload}: AnimatedDownloadButtonProps) => {
 	return (
-    <DownloadButtonContainer >
+    <DownloadButtonContainer onClick={handleDownload}>
       <CenteredLottie
         loop
         animationData={lottieJson}
