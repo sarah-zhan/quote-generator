@@ -98,6 +98,14 @@ export default function Home() {
 		e.preventDefault();
 		setOpenGenerator(true);
 		setProcessingQuote(true);
+		try {
+			//run lambda function
+
+			setProcessingQuote(false);
+		} catch (error) {
+			console.log('Error from lambda: ', error);
+			setProcessingQuote(false);
+		}
 	};
 
 	return (

@@ -81,7 +81,7 @@ const QuoteGeneratorModal = ({
 				<QuoteGeneratorModalContainer sx={style}>
 					<QuoteGeneratorModalInnerContainer>
 						{/* request a quote, but return null */}
-						{processingQuote === true && quoteReceived === null}
+						{(processingQuote === true && quoteReceived === null) &&
 							<>
 								<ModalCircularProgress
 								size={'8rem'}
@@ -98,7 +98,7 @@ const QuoteGeneratorModal = ({
 									</span>
 								</QuoteGeneratorSubTitle>
 							</>
-
+						}
 						{/* received quote */}
 					</QuoteGeneratorModalInnerContainer>
 				</QuoteGeneratorModalContainer>
