@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
-import exp from 'constants';
 import { Box, CircularProgress } from '@mui/material';
-import { escapeLeadingUnderscores } from 'typescript';
+
 
 export const Background = styled.div`
 	background: linear-gradient(to right, #000460, #1cb5e0);

@@ -1,6 +1,8 @@
 import { Modal, Backdrop, Fade } from '@mui/material';
 import React from 'react'
 import { ModalCircularProgress, QuoteGeneratorModalContainer, QuoteGeneratorModalInnerContainer, QuoteGeneratorSubTitle, QuoteGeneratorTitle } from './QuoteGeneratorElements';
+import ImageBlock from '../animation/ImageBlock';
+import { ImageBlockContainer } from '../animation/AnimationElements';
 
 interface QuoteGeneratorModalProps {
 	open: boolean;
@@ -104,9 +106,9 @@ const QuoteGeneratorModal = ({
 								<QuoteGeneratorSubTitle style={{ marginTop: '20px' }}>
 									Here is your preview:
 								</QuoteGeneratorSubTitle>
-								<ImageBlock>
-
-								</ImageBlock>
+								<ImageBlockContainer>
+									<ImageBlock></ImageBlock>
+								</ImageBlockContainer>
 								<DownloadButton></DownloadButton>
 							</>
 						}
