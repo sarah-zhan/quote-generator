@@ -1,6 +1,6 @@
 import { Modal, Backdrop, Fade } from '@mui/material';
 import React from 'react'
-import { QuoteGeneratorModalContainer, QuoteGeneratorModalInnerContainer } from './QuoteGeneratorElements';
+import { ModalCircularProgress, QuoteGeneratorModalContainer, QuoteGeneratorModalInnerContainer } from './QuoteGeneratorElements';
 
 interface QuoteGeneratorModalProps {
 	open: boolean;
@@ -24,25 +24,79 @@ const QuoteGeneratorModal = ({
 	quoteReceived,
 	setQuoteReceived,
 }: QuoteGeneratorModalProps) => {
+
+	const wiseDevQuote = "If you don't know where to start, start where you are.";
+	const wiseDevQuoteAuthor = "XXXXXXXX";
+
+	const ModalCircleProgress = () => {
+		return (
+			<div style={{
+				width: "100%",
+				height: "100%",
+				display: "flex",
+				justifyContent: "center",
+				alignItems: "center",
+				borderRadius: "50%",
+				backgroundColor: "#000",
+				boxShadow: "0 0 5px #000",
+			}}>
+				<div style={{
+					width: "100%",
+					height: "100%",
+					borderRadius: "50%",
+					backgroundColor: "#fff",
+					boxShadow: "0 0 5px #000",
+				}}>
+				</div>
+			</div>
+		);
+	}
+
+	const ModalCircleTitle = () => {
+		return (
+			<div style={{
+				fontSize: "1.5rem",
+				fontWeight: "bold",
+				textAlign: "center",
+			}}>
+				Creating your quote...
+			</div>
+		);
+	}
+
   return (
 		<Modal
-			id="QuoteGeneratorModal"
-			aria-labelledby="Quote-Generator"
-			aria-describedby="Quote-Generator-Open-Close"
-      open={open}
+			id='QuoteGeneratorModal'
+			aria-labelledby='Quote-Generator'
+			aria-describedby='Quote-Generator-Open-Close'
+			open={open}
 			onClose={close}
 			closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{
-        timeout: 500,
-      }}
+			BackdropComponent={Backdrop}
+			BackdropProps={{
+				timeout: 500,
+			}}
 		>
 			<Fade in={open}>
 				<QuoteGeneratorModalContainer sx={style}>
-					<QuoteGeneratorModalInnerContainer
-					></QuoteGeneratorModalInnerContainer>
+					<QuoteGeneratorModalInnerContainer>
+						{/* request a quote, but return null */}
+						{processingQuote === true && quoteReceived === null && (
+							<>
+								<ModalCircularProgress size={'8rem'} thickness={2.5} />
+								<ModalCircleTitle>Creating your quote...</ModalCircleTitle>
+								<ModalCircleDescription style={{ marginTop: '1rem' }}>
+									{wiseDevQuote}
+									<br />
+									<span style={{ fontSize: '0.8rem' }}>
+										<strong>{wiseDevQuoteAuthor}</strong>
+									</span>
+								</ModalCircleDescription>
+							</>
+						)}
+						{/* received quote */}
+					</QuoteGeneratorModalInnerContainer>
 				</QuoteGeneratorModalContainer>
-
 			</Fade>
 		</Modal>
 	);

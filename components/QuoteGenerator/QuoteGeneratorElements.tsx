@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
 import exp from 'constants';
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import { escapeLeadingUnderscores } from 'typescript';
 
 export const Background = styled.div`
@@ -171,4 +171,13 @@ export const QuoteGeneratorModalInnerContainer = styled.div`
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+`;
+
+export const ModalCircularProgress = styled(CircularProgress)`
+	color: white !important;
+	stroke-linecap: round;
+	position: relative;
+	margin-left: -55px;
+	left: 50%;
+	transform: translateX(-50%);
 `;
