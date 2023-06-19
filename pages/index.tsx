@@ -147,10 +147,8 @@ export default function Home() {
 						</QuoteGeneratorSubTitle>
 
 						{/* button quote generator */}
-						<QuoteGeneratorButton>
-							<QuoteGeneratorButtonText onClick={handleOpenGenerator}>
-								Inspire me!
-							</QuoteGeneratorButtonText>
+						<QuoteGeneratorButton onClick={handleOpenGenerator}>
+							<QuoteGeneratorButtonText>Inspire me!</QuoteGeneratorButtonText>
 						</QuoteGeneratorButton>
 					</QuoteGeneratorInner>
 				</QuoteGenerator>
