@@ -81,16 +81,13 @@ const QuoteGeneratorModal = ({
 				<QuoteGeneratorModalContainer sx={style}>
 					<QuoteGeneratorModalInnerContainer>
 						{/* request a quote, but return null */}
-						{(processingQuote === true && quoteReceived === null) &&
+						{processingQuote === true && quoteReceived === null && (
 							<>
-								<ModalCircularProgress
-								size={'8rem'}
-								thickness={2.5}
-								/>
+								<ModalCircularProgress size={'8rem'} thickness={2.5} />
 								<QuoteGeneratorTitle>
 									Creating your quote...
 								</QuoteGeneratorTitle>
-								<QuoteGeneratorSubTitle style={{marginTop: '20px'}}>
+								<QuoteGeneratorSubTitle style={{ marginTop: '20px' }}>
 									{wiseDevQuote}
 									<br></br>
 									<span style={{ fontSize: 26 }}>
@@ -98,8 +95,21 @@ const QuoteGeneratorModal = ({
 									</span>
 								</QuoteGeneratorSubTitle>
 							</>
+						)}
+						{quoteReceived !== null &&
+							<>
+								<QuoteGeneratorTitle>
+									Your quote is ready!
+								</QuoteGeneratorTitle>
+								<QuoteGeneratorSubTitle style={{ marginTop: '20px' }}>
+									Here is your preview:
+								</QuoteGeneratorSubTitle>
+								<ImageBlock>
+
+								</ImageBlock>
+								<DownloadButton></DownloadButton>
+							</>
 						}
-						{/* received quote */}
 					</QuoteGeneratorModalInnerContainer>
 				</QuoteGeneratorModalContainer>
 			</Fade>
