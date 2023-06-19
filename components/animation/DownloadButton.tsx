@@ -4,7 +4,9 @@ import Lottie from 'react-lottie-player';
 import lottieJson from '../../assets/animated-photo.json';
 import { CenteredLottie, DownloadButtonContainer, DownloadButtonText } from './AnimationElements';
 
-
+interface AnimatedDownloadButtonProps {
+  handleDownload: () => void;
+};
 
 const DownloadButton = ({handleDownload}: AnimatedDownloadButtonProps) => {
 	return (
