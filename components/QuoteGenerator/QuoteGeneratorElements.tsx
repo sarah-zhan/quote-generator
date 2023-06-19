@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
 import exp from 'constants';
+import { Box } from '@mui/material';
+import { escapeLeadingUnderscores } from 'typescript';
 
 export const Background = styled.div`
 	background: linear-gradient(to right, #000460, #1cb5e0);
@@ -147,4 +149,26 @@ export const QuoteGeneratorButtonText = styled.div`
 	position: absolute;
 	width: 100%;
 	text-align: center;
+`;
+
+export const QuoteGeneratorModalContainer = styled(Box)`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 70vw;
+	height: 70vh;
+	background: rgb(193, 193, 255 / 19%);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border-radius: 10px;
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	border: 1px solid rgba(255, 255, 255, 0.18);
+`;
+
+export const QuoteGeneratorModalInnerContainer = styled.div`
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 `;

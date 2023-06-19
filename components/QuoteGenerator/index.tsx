@@ -1,5 +1,6 @@
 import { Modal, Backdrop, Fade } from '@mui/material';
 import React from 'react'
+import { QuoteGeneratorModalContainer, QuoteGeneratorModalInnerContainer } from './QuoteGeneratorElements';
 
 interface QuoteGeneratorModalProps {
 	open: boolean;
@@ -9,6 +10,11 @@ interface QuoteGeneratorModalProps {
 	quoteReceived: String | null;
 	setQuoteReceived: React.Dispatch<React.SetStateAction<String | null>>;
 }
+
+const style = {
+
+};
+
 
 const QuoteGeneratorModal = ({
 	open,
@@ -24,7 +30,7 @@ const QuoteGeneratorModal = ({
 			aria-labelledby="Quote-Generator"
 			aria-describedby="Quote-Generator-Open-Close"
       open={open}
-			onclose={close}
+			onClose={close}
 			closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
@@ -32,7 +38,11 @@ const QuoteGeneratorModal = ({
       }}
 		>
 			<Fade in={open}>
-				
+				<QuoteGeneratorModalContainer sx={style}>
+					<QuoteGeneratorModalInnerContainer
+					></QuoteGeneratorModalInnerContainer>
+				</QuoteGeneratorModalContainer>
+
 			</Fade>
 		</Modal>
 	);

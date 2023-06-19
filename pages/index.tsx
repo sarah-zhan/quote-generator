@@ -48,13 +48,11 @@ function graphQLResult(response: any): response is GraphQLResult<{
 	);
 }
 
-
 export default function Home() {
 	const [numberOfQuotes, setNumberOfQuotes] = useState<Number | null>(0);
-	const [openGenerator, setOpenGenerator] = useState<boolean>(false);
-	const [processingQuote, setProcessingQuote] = useState<boolean>(false);
+	const [openGenerator, setOpenGenerator] = useState(false);
+	const [processingQuote, setProcessingQuote] = useState(false);
 	const [quoteReceived, setQuoteReceived] = useState<String | null>(null);
-	// const [quote, setQuote] = useState<string>('');
 	// to fetch the quotes
 	const updateData = async () => {
 		try {
@@ -91,14 +89,16 @@ export default function Home() {
 	// handle close of quote generator modal
 	const handleCloseGenerator = () => {
 		setOpenGenerator(false);
+		setProcessingQuote(false);
+		setQuoteReceived(null);
 	};
 
 	// handle open of quote generator modal
-	const handleOpenGenerator = async(e: React.SyntheticEvent) => {
+	const handleOpenGenerator = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		setOpenGenerator(true);
-
-	}
+		setProcessingQuote(true);
+	};
 
 	return (
 		<>
