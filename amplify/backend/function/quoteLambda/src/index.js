@@ -1,8 +1,18 @@
-
+/* Amplify Params - DO NOT EDIT
+	API_QUOTEGENERATOR_GRAPHQLAPIIDOUTPUT
+	API_QUOTEGENERATOR_QUOTEAPPDATATABLE_ARN
+	API_QUOTEGENERATOR_QUOTEAPPDATATABLE_NAME
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT */
 
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
+
+// aws packages
+const AWS = require('aws-sdk');
+
 exports.handler = async (event) => {
     console.log(`EVENT: ${JSON.stringify(event)}`);
     return {
@@ -15,3 +25,4 @@ exports.handler = async (event) => {
         body: JSON.stringify('Hello from Lambda!'),
     };
 };
+
