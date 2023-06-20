@@ -12,7 +12,39 @@ Amplify Params - DO NOT EDIT */
 
 // aws packages
 const AWS = require('aws-sdk');
+const docClient = new AWS.DynamoDB.DocumentClient();
 
+// third party packages
+const uuid = require('uuid');
+// image generation packages
+const sharp = require('sharp');
+const fetch = require('node-fetch');
+const path = require('path');
+const fs = require('fs');
+
+//update DynamoDB Table
+const updateTable = async (quote) => {
+    const tableName = process.env.API_QUOTEGENERATOR_QUOTEAPPDATATABLE_NAME;
+    const id = '8ZfRL2xEer63Lm2lWrbfhjfJRG'
+    try {
+        const quoteParams = {
+            TableName: tableName,
+            Key: {
+                'id': id
+            },
+            updateExpression: 'SET #quotesGenerated = #quotesGenerated + :inc',
+            ExpressionAttributeValues: {
+                ':inc': 1,
+            },
+            ExpressionAttributeNames: {
+                
+            }
+        }
+    } catch (err) {
+        console.log('DynamoDB update error',err);
+
+    }
+}
 exports.handler = async (event) => {
     console.log(`EVENT: ${JSON.stringify(event)}`);
     return {
