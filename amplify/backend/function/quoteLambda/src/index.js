@@ -15,7 +15,7 @@ const AWS = require('aws-sdk');
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 // third party packages
-const uuid = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 // image generation packages
 const sharp = require('sharp');
 const fetch = require('node-fetch');
@@ -86,8 +86,8 @@ exports.handler = async event => {
 			span += `<tspan x="${width / 2}" dy="1.2em">${newText}</tspan>`;
 		}
 
-        // make svg
-        const svgImage = `
+		// make svg
+		const svgImage = `
         <svg width="${width}" height="${height}">
             <style>
             .title {
@@ -118,54 +118,53 @@ exports.handler = async event => {
                 </text>
             </g>
             <text x="${width / 2}" y="${
-                height - 10
-            }" class="footerStyles">Developed by @yishan | Quotes from ZenQuotes.io</text>
+			height - 10
+		}" class="footerStyles">Developed by @yishan | Quotes from ZenQuotes.io</text>
         </svg>
         `;
 
-        //background for svg
-        const backgroundImages = [
-            'backgrounds/Moonlit_Asteroid.jpg',
-            'backgrounds/Orange_Fun.jpg',
-            'backgrounds/Love_and_Liberty.jpg',
-            'backgrounds/Visions_of_Grandeur.jpg',
-        ];
+		//background for svg
+		const backgroundImages = [
+			'backgrounds/Moonlit_Asteroid.jpg',
+			'backgrounds/Orange_Fun.jpg',
+			'backgrounds/Love_and_Liberty.jpg',
+			'backgrounds/Visions_of_Grandeur.jpg',
+		];
 
-        const randomIndex = Math.floor(Math.random() * backgroundImages.length);
-        const selectedImage = backgroundImages[randomIndex];
+		const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+		const selectedImage = backgroundImages[randomIndex];
 
-        // put images together
-        const timestamp = new Date().toLocaleString().replace(/[^\d]/g, '');
-        const imagePath = path.join('/tmp', `quote.png`);
-        const svgBuffer = Buffer.from(svgImage);
-        const image = await sharp(selectedImage)
-            .composite([
-                {
-                    input: svgBuffer,
-                    top: 0,
-                    left: 0,
-                },
-            ])
-            .toFile(imagePath);
+		// put images together
+		const timestamp = new Date().toLocaleString().replace(/[^\d]/g, '');
+		const imagePath = path.join('/tmp', `quote.png`);
+		const svgBuffer = Buffer.from(svgImage);
+		const image = await sharp(selectedImage)
+			.composite([
+				{
+					input: svgBuffer,
+					top: 0,
+					left: 0,
+				},
+			])
+			.toFile(imagePath);
 
-            // update dynamoDB table
-            try {
-                updateTable();
-            } catch (err) {
-                console.log('DynamoDB update error', err);
-            }
+		// update dynamoDB table
+		try {
+			updateTable();
+		} catch (err) {
+			console.log('DynamoDB update error', err);
+		}
 
-
-            return {
-                statusCode: 200,
-                //  enable CORS requests
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Content-Type': 'image/png',
-                },
-                body: fs.readFileSync(imagePath).toString('base64'),
-                isBase64Encoded: true,
-            };
-    }
+		return {
+			statusCode: 200,
+			//  enable CORS requests
+			headers: {
+				'Access-Control-Allow-Origin': '*',
+				'Content-Type': 'image/png',
+			},
+			body: fs.readFileSync(imagePath).toString('base64'),
+			isBase64Encoded: true,
+		};
+	};
 	return await getRandomQuote(apiURL);
 };
