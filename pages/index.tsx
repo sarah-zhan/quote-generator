@@ -23,8 +23,9 @@ import QuoteGeneratorModal from '@/components/QuoteGenerator';
 import image1 from '../assets/Moon01.png';
 import image2 from '../assets/Sun.png';
 import { API } from 'aws-amplify';
-import { quotesQueryName } from '@/src/graphql/queries';
+import { generateAQuote, quotesQueryName } from '@/src/graphql/queries';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
+import { log } from 'console';
 
 // interface for DynomoDB object
 interface UpdateData {
@@ -100,6 +101,28 @@ export default function Home() {
 		setProcessingQuote(true);
 		try {
 			//run lambda function
+			const runFunction = "runFunction";
+			const runFunctionStringified = JSON.stringify(runFunction);
+			const response = await API.graphql<GeneratedAQuoteData>({
+				query: generateAQuote,
+				authMode: 'AWS_IAM',
+				variables: {
+					input: runFunctionStringified,
+				},
+			});
+			const responseStringified = JSON.stringify(response);
+			const responseReStringified = JSON.stringify(responseStringified);
+			const bodyIndex = responseReStringified.indexOf('body=') + 5;
+			const bodyAndBase64 = responseReStringified.substring(bodyIndex);
+			const bodyArray = bodyAndBase64.split(',');
+			const body = bodyArray[0];
+			setQuoteReceived(body);
+
+			// end
+			setProcessingQuote(false);
+
+			// fetch new quotes
+			updateData();
 
 			// simulate loading
 			setTimeout(() => {
