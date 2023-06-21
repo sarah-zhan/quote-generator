@@ -25,7 +25,6 @@ import image2 from '../assets/Sun.png';
 import { API } from 'aws-amplify';
 import { generateAQuote, quotesQueryName } from '@/src/graphql/queries';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
-import { log } from 'console';
 
 // interface for DynomoDB object
 interface UpdateData {
@@ -34,6 +33,15 @@ interface UpdateData {
 	quotesGenerated: number;
 	createdAt: string;
 	updatedAt: string;
+}
+
+// interface for lambda function
+interface LambdaResponse {
+	generateAQuote: {
+		statusCode: number;
+		headers: {[key: string]: string},
+		body: string;
+	}
 }
 
 //type guard
@@ -103,7 +111,7 @@ export default function Home() {
 			//run lambda function
 			const runFunction = "runFunction";
 			const runFunctionStringified = JSON.stringify(runFunction);
-			const response = await API.graphql<GeneratedAQuoteData>({
+			const response = await API.graphql<LambdaResponse>({
 				query: generateAQuote,
 				authMode: 'AWS_IAM',
 				variables: {
@@ -116,6 +124,7 @@ export default function Home() {
 			const bodyAndBase64 = responseReStringified.substring(bodyIndex);
 			const bodyArray = bodyAndBase64.split(',');
 			const body = bodyArray[0];
+			console.log('body: ', body);
 			setQuoteReceived(body);
 
 			// end
@@ -123,11 +132,6 @@ export default function Home() {
 
 			// fetch new quotes
 			updateData();
-
-			// simulate loading
-			setTimeout(() => {
-				setProcessingQuote(false);
-			}, 2000);
 
 		} catch (error) {
 			console.log('Error from lambda: ', error);

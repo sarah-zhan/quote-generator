@@ -29,6 +29,7 @@ const QuoteGeneratorModal = ({
 	setProcessingQuote,
 	quoteReceived,
 	setQuoteReceived,
+
 }: QuoteGeneratorModalProps) => {
 	const wiseDevQuote = "If you don't know where to start, start where you are.";
 	const wiseDevQuoteAuthor = 'From an experienced Software Developer';
@@ -57,45 +58,8 @@ const QuoteGeneratorModal = ({
 				URL.revokeObjectURL(url);
 			};
 		}
-	}, []);
+	}, [quoteReceived]);
 
-	// // handles processing
-
-	// const ModalCircleProgress = () => {
-	// 	return (
-	// 		<div style={{
-	// 			width: "100%",
-	// 			height: "100%",
-	// 			display: "flex",
-	// 			justifyContent: "center",
-	// 			alignItems: "center",
-	// 			borderRadius: "50%",
-	// 			backgroundColor: "#000",
-	// 			boxShadow: "0 0 5px #000",
-	// 		}}>
-	// 			<div style={{
-	// 				width: "100%",
-	// 				height: "100%",
-	// 				borderRadius: "50%",
-	// 				backgroundColor: "#fff",
-	// 				boxShadow: "0 0 5px #000",
-	// 			}}>
-	// 			</div>
-	// 		</div>
-	// 	);
-	// }
-
-	// const ModalCircleTitle = () => {
-	// 	return (
-	// 		<div style={{
-	// 			fontSize: "1.5rem",
-	// 			fontWeight: "bold",
-	// 			textAlign: "center",
-	// 		}}>
-	// 			Creating your quote...
-	// 		</div>
-	// 	);
-	// }
 
 	return (
 		<Modal
@@ -114,7 +78,7 @@ const QuoteGeneratorModal = ({
 				<QuoteGeneratorModalContainer sx={style}>
 					<QuoteGeneratorModalInnerContainer>
 						{/* request a quote, but return null */}
-						{processingQuote === true && quoteReceived === null && (
+						{processingQuote === true && quoteReceived === null &&
 							<>
 								<ModalCircularProgress size={'8rem'} thickness={2.5} />
 								<QuoteGeneratorTitle>
@@ -126,8 +90,8 @@ const QuoteGeneratorModal = ({
 									<span style={{ fontSize: 26 }}>{wiseDevQuoteAuthor}</span>
 								</QuoteGeneratorSubTitle>
 							</>
-						)}
-						{quoteReceived !== null && (
+						}
+						{quoteReceived !== null &&
 							<>
 								<QuoteGeneratorTitle>Your quote is ready!</QuoteGeneratorTitle>
 								<QuoteGeneratorSubTitle style={{ marginTop: '20px' }}>
@@ -141,7 +105,7 @@ const QuoteGeneratorModal = ({
 								</ImageBlockContainer>
 								<DownloadButton handleDownload={useHandleDownload} />
 							</>
-						)}
+						}
 					</QuoteGeneratorModalInnerContainer>
 				</QuoteGeneratorModalContainer>
 			</Fade>
