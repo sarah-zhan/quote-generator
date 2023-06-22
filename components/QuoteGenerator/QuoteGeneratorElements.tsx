@@ -54,7 +54,7 @@ export const FooterLink = styled(Link)`
   text-decoration: none;
 `;
 
-export const QuoteGenerator = styled.div`
+export const QuoteGeneratorContainer = styled.div`
 	min-height: 350px;
 	min-width: 350px;
 	height: 70vh;
@@ -183,8 +183,4 @@ export const ModalCircularProgress = styled(CircularProgress)`
 	margin-left: -55px;
 	left: 50%;
 	transform: translateX(-50%);
-`;
-
-export const ModalCircleTitle = styled.div`
-
 `;

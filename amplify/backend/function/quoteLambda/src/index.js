@@ -14,8 +14,6 @@ Amplify Params - DO NOT EDIT */
 const AWS = require('aws-sdk');
 const docClient = new AWS.DynamoDB.DocumentClient();
 
-// third party packages
-const { v4: uuidv4 } = require('uuid');
 // image generation packages
 const sharp = require('sharp');
 const fetch = require('node-fetch');
@@ -29,13 +27,11 @@ const updateTable = async quote => {
 	try {
 		const quoteParams = {
 			TableName: tableName,
-			Key: {
-				id: id,
-			},
-			updateExpression: 'SET #quotesGenerated = #quotesGenerated + :inc',
+			Key: { id },
 			ExpressionAttributeValues: {
 				':inc': 1,
 			},
+			UpdateExpression: 'SET #quotesGenerated = #quotesGenerated + :inc',
 			ExpressionAttributeNames: {
 				'#quotesGenerated': 'quotesGenerated',
 			},
@@ -43,6 +39,7 @@ const updateTable = async quote => {
 		};
 
 		const updateObject = await docClient.update(quoteParams).promise();
+		console.log('updateObject: ', updateObject);
 		return updateObject;
 	} catch (err) {
 		console.log('DynamoDB update error', err);

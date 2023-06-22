@@ -29,19 +29,18 @@ const QuoteGeneratorModal = ({
 	setProcessingQuote,
 	quoteReceived,
 	setQuoteReceived,
-
 }: QuoteGeneratorModalProps) => {
 	const wiseDevQuote = "If you don't know where to start, start where you are.";
 	const wiseDevQuoteAuthor = 'From an experienced Software Developer';
 
-	const [blockUrl, setBlockUrl] = useState<string | null>(null);
+	const [blobUrl, setBlobUrl] = useState<string | null>(null);
 
 	// handles download
-	const useHandleDownload = () => {
+	const handleDownload = () => {
 		const link = document.createElement('a');
-		if (typeof blockUrl === 'string') {
+		if (typeof blobUrl === 'string') {
 			link.download = 'quote.png';
-			link.href = blockUrl;
+			link.href = blobUrl;
 			link.click();
 		}
 	};
@@ -52,7 +51,7 @@ const QuoteGeneratorModal = ({
 			const binaryData = Buffer.from(quoteReceived, 'base64');
 			const blob = new Blob([binaryData], { type: 'image/png' });
 			const url = URL.createObjectURL(blob);
-			setBlockUrl(url);
+			setBlobUrl(url);
 
 			return () => {
 				URL.revokeObjectURL(url);
@@ -60,12 +59,11 @@ const QuoteGeneratorModal = ({
 		}
 	}, [quoteReceived]);
 
-
 	return (
 		<Modal
 			id='QuoteGeneratorModal'
-			aria-labelledby='Quote-Generator'
-			aria-describedby='Quote-Generator-Open-Close'
+			aria-labelledby='spring-modal-quotegeneratormodal'
+			aria-describedby='spring-modal-quotegeneratormodal-description'
 			open={open}
 			onClose={close}
 			closeAfterTransition
@@ -78,7 +76,7 @@ const QuoteGeneratorModal = ({
 				<QuoteGeneratorModalContainer sx={style}>
 					<QuoteGeneratorModalInnerContainer>
 						{/* request a quote, but return null */}
-						{processingQuote === true && quoteReceived === null &&
+						{processingQuote === true && quoteReceived === null && (
 							<>
 								<ModalCircularProgress size={'8rem'} thickness={2.5} />
 								<QuoteGeneratorTitle>
@@ -90,22 +88,19 @@ const QuoteGeneratorModal = ({
 									<span style={{ fontSize: 26 }}>{wiseDevQuoteAuthor}</span>
 								</QuoteGeneratorSubTitle>
 							</>
-						}
-						{quoteReceived !== null &&
+						)}
+						{quoteReceived !== null && (
 							<>
 								<QuoteGeneratorTitle>Your quote is ready!</QuoteGeneratorTitle>
 								<QuoteGeneratorSubTitle style={{ marginTop: '20px' }}>
 									Here is your preview:
 								</QuoteGeneratorSubTitle>
 								<ImageBlockContainer>
-									<ImageBlock
-										quoteReceived={quoteReceived}
-										blockUrl={blockUrl}
-									/>
+									<ImageBlock quoteReceived={quoteReceived} blobUrl={blobUrl} />
 								</ImageBlockContainer>
-								<DownloadButton handleDownload={useHandleDownload} />
+								<DownloadButton handleDownload={handleDownload} />
 							</>
-						}
+						)}
 					</QuoteGeneratorModalInnerContainer>
 				</QuoteGeneratorModalContainer>
 			</Fade>

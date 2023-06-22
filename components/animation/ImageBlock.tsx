@@ -3,13 +3,15 @@ import Image from 'next/image';
 
 interface ImageBlockProps {
 	quoteReceived: String | null;
-	blockUrl: string | null;
+	blobUrl: string | null;
 }
 
 const ImageBlock = ({
 	quoteReceived,
-	blockUrl
+	blobUrl
 }: ImageBlockProps) => {
+
+	// mock API
 	// const [blobUrl, setBlobUrl] = useState<string | null>(null);
 
 	// useEffect(() => {
@@ -33,13 +35,13 @@ const ImageBlock = ({
 	// 	};
 	// }, [])
 
-	if (!blockUrl) {
+	if (!blobUrl) {
 		return null;
 	}
 
 	return (
 		<Image
-			src={blockUrl}
+			src={blobUrl}
 			alt={'Generated quote card'}
 			width={150}
 			height={100}

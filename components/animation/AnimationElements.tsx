@@ -51,7 +51,6 @@ export const DownloadButtonContainer = styled.div`
 		box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
 		-webkit-backdrop-filter: blur(20px);
 		backdrop-filter: blur(20px);
-		// -webkit-backdrop-filter: blur(20px);
 	}
 `;
 

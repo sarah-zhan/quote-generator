@@ -10,9 +10,9 @@ import {
 	BackgroundImage2,
 	Footer,
 	FooterLink,
-	QuoteGenerator,
 	QuoteGeneratorButton,
 	QuoteGeneratorButtonText,
+	QuoteGeneratorContainer,
 	QuoteGeneratorInner,
 	QuoteGeneratorSubTitle,
 	QuoteGeneratorTitle,
@@ -26,8 +26,8 @@ import { API } from 'aws-amplify';
 import { generateAQuote, quotesQueryName } from '@/src/graphql/queries';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
 
-// interface for DynomoDB object
-interface UpdateData {
+// interface for DynamoDB object
+interface UpdateQuoteInfoData {
 	id: string;
 	queryName: string;
 	quotesGenerated: number;
@@ -36,18 +36,18 @@ interface UpdateData {
 }
 
 // interface for lambda function
-interface LambdaResponse {
+interface GenerateAQuoteData {
 	generateAQuote: {
 		statusCode: number;
-		headers: {[key: string]: string},
+		headers: { [key: string]: string };
 		body: string;
-	}
+	};
 }
 
 //type guard
 function graphQLResult(response: any): response is GraphQLResult<{
 	quotesQueryName: {
-		items: [UpdateData];
+		items: [UpdateQuoteInfoData];
 	};
 }> {
 	return (
@@ -63,9 +63,9 @@ export default function Home() {
 	const [processingQuote, setProcessingQuote] = useState(false);
 	const [quoteReceived, setQuoteReceived] = useState<String | null>(null);
 	// to fetch the quotes
-	const updateData = async () => {
+	const UpdateQuoteInfo = async () => {
 		try {
-			const response = await API.graphql<UpdateData>({
+			const response = await API.graphql<UpdateQuoteInfoData>({
 				query: quotesQueryName,
 				authMode: 'AWS_IAM',
 				variables: {
@@ -84,15 +84,17 @@ export default function Home() {
 			}
 
 			// update the number of quotes
-			const number = response.data.quotesQueryName.items[0].quotesGenerated;
-			setNumberOfQuotes(number);
+			const receivedNumberOfQuotes =
+				response.data.quotesQueryName.items[0].quotesGenerated;
+			setNumberOfQuotes(receivedNumberOfQuotes);
+			console.log('numberOfQuotes: ', receivedNumberOfQuotes);
 		} catch (error) {
 			console.log('Error from data: ', error);
 		}
 	};
 
 	useEffect(() => {
-		updateData();
+		UpdateQuoteInfo();
 	}, []);
 
 	// handle close of quote generator modal
@@ -109,9 +111,9 @@ export default function Home() {
 		setProcessingQuote(true);
 		try {
 			//run lambda function
-			const runFunction = "runFunction";
+			const runFunction = 'runFunction';
 			const runFunctionStringified = JSON.stringify(runFunction);
-			const response = await API.graphql<LambdaResponse>({
+			const response = await API.graphql<GenerateAQuoteData>({
 				query: generateAQuote,
 				authMode: 'AWS_IAM',
 				variables: {
@@ -124,15 +126,14 @@ export default function Home() {
 			const bodyAndBase64 = responseReStringified.substring(bodyIndex);
 			const bodyArray = bodyAndBase64.split(',');
 			const body = bodyArray[0];
-			console.log('body: ', body);
+			// console.log('body: ', body);
 			setQuoteReceived(body);
 
 			// end
 			setProcessingQuote(false);
 
 			// fetch new quotes
-			updateData();
-
+			UpdateQuoteInfo();
 		} catch (error) {
 			console.log('Error from lambda: ', error);
 			setProcessingQuote(false);
@@ -159,7 +160,7 @@ export default function Home() {
 					setQuoteReceived={setQuoteReceived}
 				/>
 				{/* Quote Generator */}
-				<QuoteGenerator>
+				<QuoteGeneratorContainer>
 					<QuoteGeneratorInner>
 						<QuoteGeneratorTitle>Your Daily Mind Boost</QuoteGeneratorTitle>
 						<QuoteGeneratorSubTitle>
@@ -178,7 +179,7 @@ export default function Home() {
 							<QuoteGeneratorButtonText>Inspire me!</QuoteGeneratorButtonText>
 						</QuoteGeneratorButton>
 					</QuoteGeneratorInner>
-				</QuoteGenerator>
+				</QuoteGeneratorContainer>
 
 				{/* background images */}
 				<BackgroundImage1 src={image1} height='280' alt='image1' />
@@ -195,7 +196,7 @@ export default function Home() {
 							target='_blank'
 							rel='noopener noreferrer'
 						>
-							@yishanzhan
+							@yishan
 						</FooterLink>
 					</>
 				</Footer>
