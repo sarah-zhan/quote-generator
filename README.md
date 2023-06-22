@@ -24,5 +24,5 @@ The app makes an API call and randomly generates a quote with a random backgroun
 
 ✔️ It was quite scared at first because of all the new tech stacks which I have never learnt before. However, the basic logic seems aligning with other languages. Try it out and believe in yourself. Have fun...
 
-💁‍♀️ DON'T download yarn. AWS lambda need to use NodeJS 16. Node 18 does NOT work. Sharp package need to install in a specific way.
+💁‍♀️ DON'T download yarn. AWS lambda need to use NodeJS 16. Node 18 does NOT work. Sharp package need to install in a specific way ```npm i --arch=x64 --platform=linux sharp```
 
