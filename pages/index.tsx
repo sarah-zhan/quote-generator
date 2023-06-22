@@ -188,7 +188,7 @@ export default function Home() {
 				{/* footer */}
 				<Footer>
 					<>
-						Quotes Generated: {numberOfQuotes}
+						{/* Quotes Generated: {numberOfQuotes} */}
 						<br />
 						Developed with 💖 by{' '}
 						<FooterLink
