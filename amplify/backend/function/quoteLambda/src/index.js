@@ -15,7 +15,7 @@ const AWS = require('aws-sdk');
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 // third party packages
-const { v4: uuidv4 } = require('uuid');
+// const { v4: uuidv4 } = require('uuid');
 // image generation packages
 const sharp = require('sharp');
 const fetch = require('node-fetch');

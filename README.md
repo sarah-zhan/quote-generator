@@ -14,7 +14,7 @@ The app makes an API call and randomly generates a quote with a random backgroun
 ### Getting Started
 - Download all the packages with ```npm i ```
 - Run the development server: ```npm run dev ```
-- Tech stacks: Next.js, NodeJS, TypeScript, AWS Lambda, DynamoDB, AppSync, styled components, MUI
+- Tech stacks: Next.js, NodeJS, TypeScript, AWS Amplify, AWS Lambda, DynamoDB, AppSync, styled components, MUI
 
 😊 I have learnt so much from this project, especially feeling the power from AWS serverless lambda. How easy it is to get the backend running without all the configurations and query.
 
